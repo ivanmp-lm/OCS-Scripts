@@ -29,8 +29,6 @@ cd ~
 systemctl restart apache2
 #Inicializar MariaDB
 systemctl start mariadb
-#Cambiar contraseña usuario root de MariaDB
-sudo mysqladmin --user=root password "ivm321"
 #Crear DB y USERS para OCSInventory
 mysql -u root <<< "CREATE DATABASE ocsweb;"
 mysql -u root <<< "CREATE USER 'ocs'@'localhost' IDENTIFIED BY 'ocs';"
@@ -51,3 +49,34 @@ localhost
 www-data
 www-data
 /etc/apache2/conf-available
+/usr/bin/perl
+y
+/var/log/ocsinventory-server
+/etc/ocsinventory-server/plugins
+/etc/ocsinventory-server/perl
+y
+/usr/local/share/perl/5.30.0
+y
+y
+y
+/usr/share/ocsinventory-reports
+/var/lib/ocsinventory-reports
+systemctl restart apache2
+#Habilitar archivos de configuración necesarios para OCS Inventory
+a2enconf ocsinventory-reports.conf
+a2enconf z-ocsinventory-server.conf
+a2enconf zz-ocsinventory-restapi.conf
+systemctl reload apache2
+#Añadir permisos a la carpeta donde se almacenan los informes de OCS Inventory
+chown -R www-data: /var/lib/ocsinventory-reports/
+systemctl restart apache2
+#Eliminar archivo php install de OCS Inventory y cambiar contraseña de acceso al panel
+rm /usr/share/ocsinventory-reports/ocsreports/install.php
+mysql -u root <<< "set password for 'ocs'@'localhost'=password('ivm321')"
+mysql -u root <<< "FLUSH PRIVILEGES;"
+#Cambiar contraseña usuario root de MariaDB
+mysqladmin --user=root password "ivm321"
+#Actualizar contraseña de OCS Inventory en los archivos de configuración correspondientes
+sed -i '2,/ocs/! {s/ocs/ivm321/'} /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
+sed -i 's/OCS_DB_PWD ocs/OCS_DB_PWD ivm321/' /etc/apache2/conf-enabled/z-ocsinventory-server.conf
+systemctl restart apache2
