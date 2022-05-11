@@ -27,3 +27,27 @@ cp cli/php.ini /etc/php/7.4/cli/php.ini
 cp test.php /var/www/html/test.php
 cd ~
 systemctl restart apache2
+#Inicializar MariaDB
+systemctl start mariadb
+#Cambiar contraseña usuario root de MariaDB
+sudo mysqladmin --user=root password "ivm321"
+#Crear DB y USERS para OCSInventory
+mysql -u root <<< "CREATE DATABASE ocsweb;"
+mysql -u root <<< "CREATE USER 'ocs'@'localhost' IDENTIFIED BY 'ocs';"
+mysql -u root <<< "GRANT ALL PRIVILEGES ON ocsweb.* TO 'ocs'@'localhost' WITH GRANT OPTION;"
+mysql -u root <<< "FLUSH PRIVILEGES;"
+#Instalar OCSInventory Server
+mkdir OCS
+cd OCS
+wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/2.9.2/OCSNG_UNIX_SERVER-2.9.2.tar.gz
+tar -xzf *
+cd OCSNG_UNIX_SERVER-2.9.2
+./setup.sh
+y
+localhost
+3306
+/usr/sbin/apache2ctl
+/etc/apache2/apache2.conf
+www-data
+www-data
+/etc/apache2/conf-available
