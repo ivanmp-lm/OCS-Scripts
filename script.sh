@@ -20,10 +20,10 @@ perl -MCPAN -e 'install Switch'
 perl -MCPAN -e 'install Plack::Handler'
 #Asegurar que el módulo perl funcione en Apache
 a2enmod perl
-systemctl restart apache2
-#Copiar archivos php previamente modificados
+#Copiar archivos php previamente modificados y guardar cambios en apache.
 cd /OCSFiles
 cp php.ini /etc/php/7.4/apache2/php.ini
 cp cli/php.ini /etc/php/7.4/cli/php.ini
 cp test.php /var/www/html/test.php
 cd ~
+systemctl restart apache2
