@@ -21,3 +21,8 @@ perl -MCPAN -e 'install Plack::Handler'
 #Asegurar que el módulo perl funcione en Apache
 a2enmod perl
 systemctl restart apache2
+#Copiar archivos php previamente modificados
+cd /OCSFiles
+cp php.ini /etc/php/7.4/apache2/php.ini
+cp cli/php.ini /etc/php/7.4/cli/php.ini
+cd ~
