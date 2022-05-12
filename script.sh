@@ -10,7 +10,7 @@ apt -y install git curl wget make cmake gcc make
 #Instalar Apache y módulos
 apt -y install libapache2-mod-perl2 libapache-dbi-perl libapache-db-perl libapache2-mod-php libarchive-zip-perl
 #Instalar PHP
-apt-get -y install php php-pclzip php-mysql php-zip php-gd php-mbstring php-curl php-xml php-soap
+apt-get -y install php php-pclzip php-mysql php-zip php-gd php-mbstring php-curl php-xml php-soap php-intl
 #Instalar Perl
 apt -y install perl libxml-simple-perl libcompress-zlib-perl libdbi-perl libdbd-mysql-perl libnet-ip-perl libsoap-lite-perl libio-compress-perl libapache-dbi-perl  libapache2-mod-perl2 libapache2-mod-perl2-dev
 #Instalar módulos Perl
@@ -80,3 +80,8 @@ mysqladmin --user=root password "ivm321"
 sed -i '2,/ocs/! {s/ocs/ivm321/'} /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
 sed -i 's/OCS_DB_PWD ocs/OCS_DB_PWD ivm321/' /etc/apache2/conf-enabled/z-ocsinventory-server.conf
 systemctl restart apache2
+#Instalar GLPI
+cd /var/www/html
+wget https://github.com/glpi-project/glpi/releases/download/10.0.0/glpi-10.0.0.tgz
+tar -xzf glpi*
+chmod 777 -R glpi
