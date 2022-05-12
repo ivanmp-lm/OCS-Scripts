@@ -74,8 +74,6 @@ systemctl restart apache2
 rm /usr/share/ocsinventory-reports/ocsreports/install.php
 mysql -u root <<< "set password for 'ocs'@'localhost'=password('ivm321')"
 mysql -u root <<< "FLUSH PRIVILEGES;"
-#Cambiar contraseña usuario root de MariaDB
-mysqladmin --user=root password "ivm321"
 #Actualizar contraseña de OCS Inventory en los archivos de configuración correspondientes
 sed -i '2,/ocs/! {s/ocs/ivm321/'} /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
 sed -i 's/OCS_DB_PWD ocs/OCS_DB_PWD ivm321/' /etc/apache2/conf-enabled/z-ocsinventory-server.conf
@@ -85,3 +83,7 @@ cd /var/www/html
 wget https://github.com/glpi-project/glpi/releases/download/10.0.0/glpi-10.0.0.tgz
 tar -xzf glpi*
 chmod 777 -R glpi
+cd ~
+rm /var/www/html/glpi/install/install.php
+#Cambiar contraseña usuario root de MariaDB
+mysqladmin --user=root password "ivm321"
