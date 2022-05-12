@@ -39,6 +39,7 @@ mkdir OCS
 cd OCS
 wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/2.9.2/OCSNG_UNIX_SERVER-2.9.2.tar.gz
 tar -xzf *
+rm OCS*.gz
 cd OCSNG_UNIX_SERVER-2.9.2
 ./setup.sh
 y
@@ -82,8 +83,16 @@ systemctl restart apache2
 cd /var/www/html
 wget https://github.com/glpi-project/glpi/releases/download/10.0.0/glpi-10.0.0.tgz
 tar -xzf glpi*
+rm glpi*.tgz
 chmod 777 -R glpi
 cd ~
 rm /var/www/html/glpi/install/install.php
+#Instalar plugin para GLPI
+cd /var/www/html/glpi/plugins
+wget https://github.com/pluginsGLPI/ocsinventoryng/releases/download/2.0.0/glpi-ocsinventoryng-2.0.0.tar.bz2
+tar -jxvf glpi*
+rm glpi*.bz2
+cd ~
+systemctl reload apache2
 #Cambiar contraseña usuario root de MariaDB
 mysqladmin --user=root password "ivm321"
