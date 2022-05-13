@@ -1,4 +1,10 @@
 #!/bin/bash
+##Este script instalará automáticamente OCSInventory y GLPI en un servidor Linux
+##Se aprovisionará al servidor con una pila LAMP y Perl para la correcta funcionalidad del software
+##Una vez finalizada la instalación se deberán configurar los componentes manualmente desde las siguientes URL
+##https://URLSERVIDOR/ocsreports y https://URLSERVIDOR/glpi
+
+#Debug
 set -x
 
 #Actualizar repos
