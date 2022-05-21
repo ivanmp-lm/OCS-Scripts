@@ -38,3 +38,6 @@ y
 y
 #Instalación completada
 #Adicionalmente en la instalación se configuró una tarea en Cron para actualizar la máquina en OCS regularmente
+#Eliminar archivos sobrantes
+cd ..
+rm -rf Ocs*
