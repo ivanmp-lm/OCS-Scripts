@@ -26,6 +26,7 @@ apt-get -y install php php-pclzip php-mysql php-zip php-gd php-mbstring php-curl
 apt -y install perl libxml-simple-perl libcompress-zlib-perl libdbi-perl libdbd-mysql-perl libnet-ip-perl libsoap-lite-perl libio-compress-perl libapache-dbi-perl  libapache2-mod-perl2 libapache2-mod-perl2-dev
 #Instalar módulos Perl
 cpan install XML::Entities
+yes
 perl -MCPAN -e 'install Mojolicious'
 perl -MCPAN -e 'install Switch'
 perl -MCPAN -e 'install Plack::Handler'
