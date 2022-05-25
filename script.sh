@@ -34,10 +34,10 @@ perl -MCPAN -e 'install Plack::Handler'
 a2enmod perl
 #Copiar archivos php previamente modificados y guardar cambios en apache.
 git clone https://github.com/ivanmp-lm/OCSFiles.git
-cd /OCSFiles
-cp php.ini /etc/php/7.4/apache2/php.ini
-cp cli/php.ini /etc/php/7.4/cli/php.ini
-cp test.php /var/www/html/test.php
+cd OCSFiles
+cp php.ini etc/php/7.4/apache2/php.ini
+cp cli/php.ini etc/php/7.4/cli/php.ini
+cp test.php var/www/html/test.php
 cd ~
 systemctl restart apache2
 #Inicializar MariaDB
