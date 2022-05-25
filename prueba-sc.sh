@@ -39,7 +39,7 @@ read -p "debug"
 
 #Copiar archivos php previamente modificados y guardar cambios en apache.
 git clone https://github.com/ivanmp-lm/OCSFiles.git
-cd /OCSFiles
+cd OCSFiles
 cp php.ini /etc/php/7.4/apache2/php.ini
 cp cli/php.ini /etc/php/7.4/cli/php.ini
 cp test.php /var/www/html/test.php
@@ -66,26 +66,6 @@ tar -xzf *
 rm OCS*.gz
 cd OCSNG_UNIX_SERVER-2.9.2
 ./setup.sh
-y
-localhost
-3306
-/usr/sbin/apache2ctl
-/etc/apache2/apache2.conf
-www-data
-www-data
-/etc/apache2/conf-available
-/usr/bin/perl
-y
-/var/log/ocsinventory-server
-/etc/ocsinventory-server/plugins
-/etc/ocsinventory-server/perl
-y
-/usr/local/share/perl/5.30.0
-y
-y
-y
-/usr/share/ocsinventory-reports
-/var/lib/ocsinventory-reports
 systemctl restart apache2
 
 read -p "debug"
