@@ -6,11 +6,8 @@
 
 ##VARIABLES
 DOMINIO=
-PWD_BD_OCS=ivm321
-PWD_ROOT_MYSQL=ivm321
-
-#Debug
-set -x
+PWD_BD_OCS=
+PWD_ROOT_MYSQL=
 
 #Actualizar repos
 apt update
@@ -89,8 +86,8 @@ rm /usr/share/ocsinventory-reports/ocsreports/install.php
 mysql -u root <<< "set password for 'ocs'@'localhost'=password('$PWD_BD_OCS')"
 mysql -u root <<< "FLUSH PRIVILEGES;"
 #Actualizar contraseña de OCS Inventory en los archivos de configuración correspondientes
-sed -i '2,/ocs/! {s/ocs/$PWD_BD_OCS/'} /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
-sed -i 's/OCS_DB_PWD ocs/OCS_DB_PWD $PWD_BD_OCS/' /etc/apache2/conf-enabled/z-ocsinventory-server.conf
+sed -i "s/define("PSWD_BASE","ocs");/define("PSWD_BASE","$PWD_BD_OCS");/" /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
+sed -i "s/OCS_DB_PWD ocs/OCS_DB_PWD $PWD_BD_OCS/" /etc/apache2/conf-enabled/z-ocsinventory-server.conf
 systemctl restart apache2
 #Instalar GLPI
 cd /var/www/html
