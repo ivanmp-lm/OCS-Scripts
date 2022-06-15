@@ -1,9 +1,6 @@
 #!/bin/bash
 ##Este Script instalará y configurará un equipo basado en UNIX (testeado en Debian) como cliente para un servidor en OCS Inventory ya existente
 
-#Variables
-SERVIDOR=
-
 #Actualizar repos
 apt update
 #Aprovisionar con los componentes necesarios
